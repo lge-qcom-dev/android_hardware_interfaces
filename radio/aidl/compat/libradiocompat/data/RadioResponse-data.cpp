@@ -63,9 +63,10 @@ Return<void> RadioResponse::getDataCallListResponse(const V1_0::RadioResponseInf
 }
 
 Return<void> RadioResponse::getDataCallListResponse_1_4(
-        const V1_0::RadioResponseInfo& info, const hidl_vec<V1_4::SetupDataCallResult>&) {
+        const V1_0::RadioResponseInfo& info,
+        const hidl_vec<V1_4::SetupDataCallResult>& dcResponse) {
     LOG_CALL << info.serial;
-    LOG(ERROR) << "IRadio HAL 1.4 not supported";
+    dataCb()->getDataCallListResponse(toAidl(info), toAidl(dcResponse));
     return {};
 }
 
@@ -142,9 +143,9 @@ Return<void> RadioResponse::setupDataCallResponse(const V1_0::RadioResponseInfo&
 }
 
 Return<void> RadioResponse::setupDataCallResponse_1_4(const V1_0::RadioResponseInfo& info,
-                                                      const V1_4::SetupDataCallResult&) {
+                                                      const V1_4::SetupDataCallResult& dcResponse) {
     LOG_CALL << info.serial;
-    LOG(ERROR) << "IRadio HAL 1.0 not supported";
+    dataCb()->setupDataCallResponse(toAidl(info), toAidl(dcResponse));
     return {};
 }
 

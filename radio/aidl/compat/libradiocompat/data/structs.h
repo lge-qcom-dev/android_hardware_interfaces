@@ -47,6 +47,8 @@ V1_1::KeepaliveRequest toHidl(const ::aidl::android::hardware::radio::data::Keep
 V1_6::OsAppId toHidl(const ::aidl::android::hardware::radio::data::OsAppId& appId);
 
 ::aidl::android::hardware::radio::data::SetupDataCallResult  //
+toAidl(const V1_4::SetupDataCallResult& res);
+::aidl::android::hardware::radio::data::SetupDataCallResult  //
 toAidl(const V1_5::SetupDataCallResult& res);
 ::aidl::android::hardware::radio::data::SetupDataCallResult  //
 toAidl(const V1_6::SetupDataCallResult& res);

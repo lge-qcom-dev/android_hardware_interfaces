@@ -147,6 +147,30 @@ static std::variant<bool, aidl::EpsQos, aidl::NrQos> toAidl(const V1_6::Qos& qos
     return false;
 }
 
+aidl::SetupDataCallResult toAidl(const V1_4::SetupDataCallResult& res) {
+    std::vector<aidl::LinkAddress> addresses;
+    for (size_t i = 0; i < res.addresses.size(); i++)
+        addresses[i] = {
+            .address = toAidl(res.addresses[i]),
+            .deprecationTime = std::numeric_limits<int64_t>::max(),
+            .expirationTime = std::numeric_limits<int64_t>::max(),
+        };
+    return {
+            .cause = aidl::DataCallFailCause(res.cause),
+            .suggestedRetryTime = res.suggestedRetryTime,
+            .cid = res.cid,
+            .active = static_cast<int32_t>(res.active),
+            .type = aidl::PdpProtocolType(res.type),
+            .ifname = res.ifname,
+            .addresses = addresses,
+            .dnses = toAidl(res.dnses),
+            .gateways = toAidl(res.gateways),
+            .pcscf = toAidl(res.pcscf),
+            .mtuV4 = res.mtu,
+            .mtuV6 = res.mtu,
+    };
+}
+
 aidl::SetupDataCallResult toAidl(const V1_5::SetupDataCallResult& res) {
     return {
             .cause = aidl::DataCallFailCause(res.cause),

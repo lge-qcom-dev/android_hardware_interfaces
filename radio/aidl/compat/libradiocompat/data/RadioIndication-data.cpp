@@ -43,10 +43,10 @@ Return<void> RadioIndication::dataCallListChanged(V1_0::RadioIndicationType type
     return {};
 }
 
-Return<void> RadioIndication::dataCallListChanged_1_4(V1_0::RadioIndicationType type,
-                                                      const hidl_vec<V1_4::SetupDataCallResult>&) {
+Return<void> RadioIndication::dataCallListChanged_1_4(
+        V1_0::RadioIndicationType type, const hidl_vec<V1_4::SetupDataCallResult>& dcList) {
     LOG_CALL << type;
-    LOG(ERROR) << "IRadio HAL 1.4 not supported";
+    dataCb()->dataCallListChanged(toAidl(type), toAidl(dcList));
     return {};
 }
 
